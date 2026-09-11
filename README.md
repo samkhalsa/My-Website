@@ -25,6 +25,6 @@ npm run preview    # serve dist/ locally
 ## Deploy
 
 1. Import the GitHub repo into Vercel. The Vite preset is detected automatically (build `npm run build`, output `dist`).
-2. Add the custom domain under Project → Settings → Domains. At the registrar, point the apex to Vercel's `A` record (`76.76.21.21`) and `www` to `cname.vercel-dns.com`; Vercel shows the exact records and issues TLS automatically.
-3. Set `SITE_URL` in `src/content/site.ts` to the final domain.
+2. Domains: `samits.life` is primary; `www.samits.life`, `samits.world` and `www.samits.world` redirect to it. DNS lives at GoDaddy: each apex has an `A` record to `76.76.21.21` and each `www` a `CNAME` to `cname.vercel-dns.com`. Vercel issues TLS automatically.
+3. `SITE_URL` in `src/content/site.ts` is set to the primary domain.
 4. Turn off GitHub Pages in the repo settings so it no longer serves the old site.

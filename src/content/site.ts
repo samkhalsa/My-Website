@@ -1,5 +1,5 @@
 /** Set this to the custom domain once it is attached in Vercel (used for canonical metadata). */
-export const SITE_URL = ''
+export const SITE_URL = 'https://samits.life'
 
 export const PENSEUM_URL = 'https://penseum.com'
 
