@@ -1,0 +1,641 @@
+/* Visual system ported from the reference site, with Geist / Geist Mono
+   (and Noto Sans Devanagari for Hindi glyphs) in place of NB International. */
+
+:root {
+  --bg: #fff;
+  --fg: #111;
+  --large-font-size: 8vw;
+  --small-font-size: 1.33333vw;
+  --header-font-family: "Geist Variable", "Noto Sans Devanagari Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body-font-family: "Geist Mono Variable", "Noto Sans Devanagari Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --underline-color: #1116;
+  --underline-color-hover: #111111b3;
+  --underline-color-soft: #11111140;
+  --underline-color-soft-hover: #1111118c;
+  --underline-shadow: #0003;
+  --underline-shadow-hero: #00000047;
+  --backdrop: #111111c7;
+  --media-bg: #0000000a;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111;
+    --fg: #f0f0f0;
+    --underline-color: #ffffff73;
+    --underline-color-hover: #ffffffd9;
+    --underline-color-soft: #ffffff4d;
+    --underline-color-soft-hover: #ffffffa6;
+    --underline-shadow: #fff6;
+    --underline-shadow-hero: #ffffff73;
+    --media-bg: #ffffff0f;
+  }
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { opacity: .2; }
+  50% { opacity: 1; }
+  100% { opacity: .2; }
+}
+
+html { position: relative; }
+html, body { height: 100%; width: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body-font-family);
+  font-size: 2vw;
+  font-weight: 400;
+  line-height: 1.35em;
+}
+
+::selection {
+  background: #ffc800;
+  color: #111;
+  text-shadow: none;
+}
+
+/* Type scale */
+
+.big {
+  animation: pageFadeIn 2s both;
+  font-family: var(--header-font-family);
+  font-size: var(--large-font-size);
+  font-weight: 500;
+  letter-spacing: -.015em;
+  line-height: 1.3em;
+}
+
+.hi .big {
+  letter-spacing: 0;
+  line-height: 1.45em;
+}
+
+.small {
+  animation: pageFadeIn 1.2s .4s both;
+  font-size: var(--small-font-size);
+  letter-spacing: .05em;
+  line-height: 1.2em;
+}
+
+.hi .small,
+[lang="hi"] { letter-spacing: 0; }
+
+@media (min-width: 1440px) {
+  .small { font-size: 16px; line-height: 1.3em; }
+}
+
+@media (max-width: 760px) {
+  .small { font-size: 12px; line-height: 1.3em; }
+}
+
+/* Layout */
+
+header {
+  align-items: center;
+  display: flex;
+  height: 50vh;
+  max-width: 1510px;
+  padding: 10vw 10vw 2.5vw;
+}
+
+@media (max-width: 760px) {
+  header {
+    height: auto;
+    min-height: 50vh;
+    padding: 18vw 5vw 14vw;
+  }
+}
+
+header > p,
+header > span { white-space: pre-wrap; }
+
+section {
+  max-width: 1510px;
+  padding: 2vw 10vw 5vw;
+}
+
+@media (max-width: 760px) {
+  section { padding: 2vw 5vw 5vw; }
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  line-height: 1.5em;
+  text-transform: uppercase;
+}
+
+footer > div { flex: 1 1; }
+
+@media (max-width: 480px) {
+  footer { flex-direction: column; }
+  footer > div { margin-block-end: 1em; }
+}
+
+/* Links */
+
+a {
+  border: 0;
+  color: inherit;
+  text-decoration: none;
+  transition: opacity .4s cubic-bezier(.075, .82, .165, 1);
+}
+
+a:hover {
+  cursor: pointer;
+  opacity: .5;
+}
+
+.small a {
+  position: relative;
+  text-decoration-color: var(--underline-color);
+  text-decoration-line: underline;
+  text-decoration-thickness: max(1px, .06em);
+  text-underline-offset: .18em;
+}
+
+.small a:hover { text-decoration-color: var(--underline-color-hover); }
+
+.underline {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  box-shadow: inset 0 -.22em 0 var(--underline-shadow);
+  position: relative;
+}
+
+@media (max-width: 760px) {
+  .underline { box-shadow: inset 0 -.16em 0 var(--underline-shadow); }
+}
+
+@media (min-width: 1440px) {
+  .underline { box-shadow: inset 0 -.28em 0 var(--underline-shadow); }
+}
+
+header.big a.underline {
+  box-shadow: inset 0 max(-5px, -.045em) 0 var(--underline-shadow-hero);
+  color: inherit;
+}
+
+header.big a.underline:hover { opacity: .5; }
+
+.more-link,
+.small a.more-link {
+  opacity: .5;
+  text-decoration-line: none;
+  transition: opacity .3s ease;
+}
+
+.more-link:hover { opacity: 1; }
+
+.small a.more-link::after {
+  background: currentColor;
+  bottom: -.1em;
+  content: "";
+  display: block;
+  height: max(1px, .06em);
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  transition: opacity .3s ease;
+}
+
+.small a.more-link:hover::after { opacity: .7; }
+
+/* Lists and footer pieces */
+
+.h-list {
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.h-list li {
+  margin-left: 0;
+  margin-right: 1.2vw;
+}
+
+@media (max-width: 480px) {
+  ul { margin: 0; }
+  .h-list li { margin-right: 2vw; }
+}
+
+.v-list {
+  list-style-type: none;
+  margin-top: 0;
+  padding-left: 0;
+}
+
+.no-margins { margin: 0; }
+
+.last-seen {
+  animation: pageFadeIn .8s both;
+  text-transform: uppercase;
+}
+
+.loading {
+  animation: shimmer 2s infinite both;
+  text-transform: uppercase;
+}
+
+.lang-switcher a {
+  cursor: pointer;
+  opacity: .4;
+}
+
+.lang-switcher a.current { opacity: 1; }
+
+.contact a { margin-right: .2em; }
+
+.emoji {
+  display: inline-block;
+  margin-right: .35em;
+}
+
+/* Page top nav (journal, post, not-found) */
+
+.page-top-nav {
+  letter-spacing: .05em;
+  max-width: 1510px;
+  padding: 2.5vw 10vw 0;
+  text-transform: uppercase;
+}
+
+.page-top-nav .h-list { margin: 0; }
+.page-top-nav a { opacity: .4; }
+.page-top-nav a.current { opacity: 1; }
+
+@media (max-width: 760px) {
+  .page-top-nav { padding: 5vw 5vw 0; }
+}
+
+/* Journal */
+
+.journal-header {
+  align-items: flex-end;
+  font-size: 4.5vw;
+  height: auto;
+  line-height: 1.2em;
+  min-height: 0;
+  padding: 6vw 10vw 5vw;
+}
+
+@media (max-width: 760px) {
+  .journal-header {
+    font-size: 7vw;
+    padding: 10vw 5vw 8vw;
+  }
+}
+
+.journal-header a { color: inherit; }
+
+.journal-entries {
+  list-style: none;
+  margin: 0 0 3em;
+  padding: 0;
+}
+
+.journal-entry {
+  margin: 0 0 7.5em;
+  max-width: 36em;
+}
+
+.journal-entry--enter { animation: pageFadeIn 1.2s ease backwards; }
+
+.journal-date {
+  display: block;
+  letter-spacing: .08em;
+  margin-bottom: .4em;
+  opacity: .5;
+  text-transform: uppercase;
+}
+
+.hi .journal-date { letter-spacing: 0; }
+
+.journal-entry-title {
+  font-family: var(--header-font-family);
+  font-size: 1.35em;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.25em;
+  margin: 0;
+  text-transform: none;
+}
+
+.hi .journal-entry-title { letter-spacing: 0; }
+.journal-entry-title a { color: inherit; }
+
+.journal-entry-title + .journal-body,
+.journal-entry-title + .journal-body-expand { margin-top: .55em; }
+
+.journal-body {
+  font-size: 1.15em;
+  letter-spacing: .02em;
+  line-height: 1.45em;
+  margin: 0;
+  text-transform: none;
+}
+
+.hi .journal-body { letter-spacing: 0; }
+
+.journal-body--pre {
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.journal-body-expand {
+  overflow: hidden;
+  position: relative;
+}
+
+.journal-body-expand-fade {
+  background: linear-gradient(180deg, transparent, var(--bg));
+  bottom: 0;
+  height: 2.2em;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+.journal-read-more {
+  font-size: 1.15em;
+  letter-spacing: .02em;
+  line-height: 1.45em;
+  margin: .35em 0 0;
+  opacity: .45;
+}
+
+.journal-more-btn {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  margin: 0;
+  padding: 0;
+  text-decoration-color: var(--underline-color-soft);
+  text-decoration-line: underline;
+  text-decoration-thickness: max(1px, .06em);
+  text-transform: lowercase;
+  text-underline-offset: .18em;
+}
+
+.journal-more-btn:hover { text-decoration-color: var(--underline-color-soft-hover); }
+
+.journal-body a.underline,
+.journal-entry-title a.underline,
+.small.journal a.underline {
+  box-shadow: none;
+  color: inherit;
+  text-decoration-color: var(--underline-color);
+  text-decoration-line: underline;
+  text-decoration-thickness: max(1px, .06em);
+  text-underline-offset: .18em;
+}
+
+.journal-body a.underline:hover,
+.journal-entry-title a.underline:hover,
+.small.journal a.underline:hover { text-decoration-color: var(--underline-color-hover); }
+
+.journal-permalink,
+.small a.journal-permalink {
+  color: inherit;
+  letter-spacing: .08em;
+  text-decoration-line: none;
+  text-transform: uppercase;
+}
+
+.hi .journal-permalink { letter-spacing: 0; }
+
+.journal-permalink:hover,
+.small a.journal-permalink:hover {
+  opacity: 1;
+  text-decoration-line: underline;
+  text-decoration-thickness: max(1px, .06em);
+  text-underline-offset: .18em;
+}
+
+.journal-not-found {
+  margin: 0 0 7.5em;
+  max-width: 36em;
+}
+
+.journal-not-found p { margin: 0 0 .55em; }
+
+.journal-back { margin: 0 0 3em; }
+
+.journal-link-cards {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: .9em;
+  margin: .9em 0 0;
+}
+
+.journal-link-card,
+.small a.journal-link-card {
+  color: inherit;
+  display: block;
+  max-width: min(22em, 100%);
+  text-decoration: none;
+}
+
+.journal-link-card:hover { opacity: 1; }
+
+.journal-link-card img {
+  aspect-ratio: 1.91 / 1;
+  background: var(--media-bg);
+  display: block;
+  object-fit: cover;
+  width: 100%;
+}
+
+.journal-link-card-title {
+  display: block;
+  font-size: 1em;
+  letter-spacing: .02em;
+  line-height: 1.35em;
+  margin-top: .4em;
+}
+
+.journal-link-card:hover .journal-link-card-title {
+  text-decoration: underline;
+  text-decoration-color: var(--underline-color);
+  text-decoration-thickness: max(1px, .06em);
+  text-underline-offset: .18em;
+}
+
+.journal-photos {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: .75em;
+  margin: .9em 0 0;
+  max-width: 100%;
+}
+
+.journal-photo-btn {
+  appearance: none;
+  background: none;
+  border: 0;
+  cursor: zoom-in;
+  display: block;
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
+}
+
+.journal-photo-btn:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
+
+.journal-photo {
+  display: block;
+  height: auto;
+  max-height: min(28em, 70vh);
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left top;
+  width: auto;
+}
+
+.journal-photo-zoom {
+  cursor: zoom-out;
+  display: flex;
+  inset: 0;
+  isolation: isolate;
+  overflow: auto;
+  position: fixed;
+  z-index: 80;
+}
+
+.journal-photo-zoom-backdrop {
+  background: var(--backdrop);
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+}
+
+.journal-photo-zoom-stage {
+  box-sizing: border-box;
+  margin: auto;
+  padding: 12vh 18vw 14vh;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.journal-photo-zoom-stage img {
+  cursor: default;
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-width: 64vw;
+  position: relative;
+  width: 64vw;
+  z-index: 1;
+}
+
+@media (max-width: 760px) {
+  .journal-photo-zoom-stage { padding: 8vh 10vw 10vh; }
+  .journal-photo-zoom-stage img {
+    max-width: 80vw;
+    width: 80vw;
+  }
+}
+
+.journal-embed {
+  aspect-ratio: 16 / 9;
+  background: var(--media-bg);
+  margin: .9em 0 0;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.journal-embed iframe {
+  border: 0;
+  display: block;
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+}
+
+/* Scroll to top */
+
+.scroll-to-top {
+  appearance: none;
+  background: none;
+  border: 0;
+  bottom: max(1.25rem, 2.5vw);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-family: var(--body-font-family);
+  font-size: var(--small-font-size);
+  letter-spacing: .04em;
+  line-height: 1;
+  margin: 0;
+  opacity: 0;
+  padding: .35em .45em;
+  pointer-events: none;
+  position: fixed;
+  right: max(1.25rem, 2.5vw);
+  text-transform: uppercase;
+  transition: opacity .35s ease;
+  z-index: 40;
+}
+
+.scroll-to-top.is-visible {
+  opacity: .45;
+  pointer-events: auto;
+}
+
+.scroll-to-top.is-visible:hover,
+.scroll-to-top.is-visible:focus-visible { opacity: 1; }
+
+.scroll-to-top:focus { outline: none; }
+
+.scroll-to-top:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .scroll-to-top {
+    bottom: .85rem;
+    font-size: 12px;
+    right: .85rem;
+  }
+}
+
+/* Motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
+}

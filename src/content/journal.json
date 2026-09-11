@@ -1,0 +1,24 @@
+[
+  {
+    "id": "2026-09-11-hello",
+    "slug": "hello",
+    "date": "2026.09.11",
+    "dateTime": "2026-09-11",
+    "title": "hello",
+    "titleHi": "नमस्ते",
+    "text": "this is the first entry in the journal.\n\ni wanted a place that is mine. not a feed, not a profile, not a pitch. just a page where i can write down what i am thinking about while building things.\n\nmost of what shows up here will be about Penseum: what we are trying, what is working, what is not. some of it will be about everything around the work. reading, walking, the small decisions that end up mattering more than the big ones.\n\nthe site itself is deliberately simple. big type, small type, a journal. it should load fast and get out of the way.\n\nif you want to follow along, the links are at the bottom of the home page.",
+    "textHi": "यह डायरी की पहली प्रविष्टि है।\n\nमुझे एक ऐसी जगह चाहिए थी जो मेरी हो। न फ़ीड, न प्रोफ़ाइल, न पिच। बस एक पन्ना जहाँ मैं लिख सकूँ कि चीज़ें बनाते हुए मैं क्या सोच रहा हूँ।\n\nयहाँ ज़्यादातर बातें Penseum के बारे में होंगी: हम क्या आज़मा रहे हैं, क्या काम कर रहा है, क्या नहीं। कुछ बातें काम के आसपास की हर चीज़ के बारे में होंगी।\n\nसाइट जानबूझकर सादी है। बड़े अक्षर, छोटे अक्षर, एक डायरी।"
+  },
+  {
+    "id": "2026-09-01-penseum",
+    "slug": "penseum",
+    "date": "2026.09.01",
+    "dateTime": "2026-09-01",
+    "title": "what i am building",
+    "titleHi": "मैं क्या बना रहा हूँ",
+    "text": "Penseum is where most of my time goes right now.\n\nmore soon.",
+    "textHi": "Penseum वह है जहाँ अभी मेरा ज़्यादातर समय जाता है।\n\nजल्द ही और।",
+    "photos": ["/journal/2026-09-01-1.svg"],
+    "links": [{ "href": "https://penseum.com", "title": "Penseum" }]
+  }
+]
