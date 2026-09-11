@@ -6,11 +6,13 @@ import { Home } from './pages/Home'
 import { Journal } from './pages/Journal'
 import { Post } from './pages/Post'
 import { NotFound } from './pages/NotFound'
+import { SummitConfetti } from './components/SummitConfetti'
 
 export function App() {
   return (
     <BrowserRouter>
       <MotionConfig reducedMotion="user">
+        <SummitConfetti />
         <Routes>
           {LOCALES.map((locale) => (
             <Route

@@ -4,7 +4,10 @@ export const SITE_URL = ''
 export const PENSEUM_URL = 'https://penseum.com'
 
 /** Shown under "PAST WORK" in the footer. Fill in as needed. */
-export const PAST_WORK: { href: string; label: string }[] = []
+export const PAST_WORK: { href: string; label: string }[] = [
+  { href: 'https://doppel.health/', label: 'Doppel Health' },
+  { href: 'https://digitaldashdev.com', label: 'Digital Dash Dev' },
+]
 
 /** Optional "More" link at the end of the past-work list. */
 export const MORE_HREF: string | null = null

@@ -8,6 +8,7 @@ import { Footer } from '../components/Footer'
 export function Home() {
   const intl = useIntl()
   usePageTitle(intl.formatMessage({ id: 'title.home' }))
+  const summit = intl.formatMessage({ id: 'home.summit' })
   return (
     <>
       <header className="big">
@@ -15,6 +16,14 @@ export function Home() {
           <FormattedMessage
             id="home.hero"
             values={{
+              name: (chunks: ReactNode) => (
+                <span className="name" data-tip={summit} tabIndex={0}>
+                  {chunks}
+                  <span className="summit" role="img" aria-label={summit}>
+                    🏔️
+                  </span>
+                </span>
+              ),
               u: (chunks: ReactNode) => (
                 <a className="underline" href={PENSEUM_URL} target="_blank" rel="noopener noreferrer">
                   {chunks}

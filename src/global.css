@@ -184,8 +184,13 @@ a:hover {
 }
 
 header.big a.underline {
-  box-shadow: inset 0 max(-5px, -.045em) 0 var(--underline-shadow-hero);
+  box-shadow: none;
   color: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: var(--underline-shadow-hero);
+  text-decoration-thickness: min(5px, .045em);
+  text-decoration-skip-ink: none;
+  text-underline-offset: .06em;
 }
 
 header.big a.underline:hover { opacity: .5; }
@@ -638,4 +643,90 @@ header.big a.underline:hover { opacity: .5; }
     animation-duration: 0s !important;
     transition-duration: 0s !important;
   }
+}
+
+/* Name mark: Samit comes from "summit" */
+
+.name {
+  cursor: help;
+  display: inline-block;
+  outline: none;
+  position: relative;
+}
+
+.name::after {
+  background: var(--fg);
+  border-radius: .35em;
+  color: var(--bg);
+  content: attr(data-tip);
+  font-family: var(--body-font-family);
+  font-size: clamp(11px, .14em, 16px);
+  font-weight: 400;
+  left: 0;
+  letter-spacing: .05em;
+  line-height: 1;
+  opacity: 0;
+  padding: .6em .8em;
+  pointer-events: none;
+  position: absolute;
+  text-transform: uppercase;
+  top: calc(100% - .35em);
+  transform: translateY(.3em);
+  transition: opacity .25s ease, transform .25s cubic-bezier(.075, .82, .165, 1);
+  white-space: nowrap;
+  z-index: 5;
+}
+
+.name:hover::after,
+.name:focus-visible::after,
+.name:focus::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hi .name::after { letter-spacing: 0; }
+
+.summit {
+  display: inline-block;
+  font-size: .32em;
+  line-height: 1;
+  margin-left: .12em;
+  vertical-align: .95em;
+}
+
+/* First-visit confetti of falling mountains */
+
+@keyframes summitFall {
+  0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+  6% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(125vh) rotate(var(--spin)); }
+}
+
+@keyframes summitSway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(var(--sway)); }
+}
+
+.summit-confetti {
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  z-index: 90;
+}
+
+.summit-confetti-piece {
+  animation: summitFall var(--dur) cubic-bezier(.3, 0, .8, .6) var(--delay) both;
+  font-size: var(--size);
+  left: var(--x);
+  line-height: 1;
+  position: absolute;
+  top: -8vh;
+  will-change: transform, opacity;
+}
+
+.summit-confetti-piece > span {
+  animation: summitSway calc(var(--dur) / 2.2) ease-in-out var(--delay) infinite;
+  display: inline-block;
 }
