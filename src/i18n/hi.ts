@@ -13,6 +13,7 @@ export const hi: Record<keyof typeof en, string> = {
   'home.lastSeen.sometime': 'कभी',
   'footer.readJournal': 'डायरी पढ़ें',
   'footer.pastWork': 'पिछला काम',
+  'footer.skills': 'स्किल्स और रेपो',
   'footer.more': 'और',
   'contact.x': 'X',
   'contact.linkedin': 'LinkedIn',

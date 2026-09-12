@@ -11,6 +11,7 @@ export const en = {
   'home.lastSeen.sometime': 'sometime',
   'footer.readJournal': 'Read Journal',
   'footer.pastWork': 'Past work',
+  'footer.skills': 'Skills & repos',
   'footer.more': 'More',
   'contact.x': 'X',
   'contact.linkedin': 'LinkedIn',

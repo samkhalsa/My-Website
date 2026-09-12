@@ -12,6 +12,15 @@ export const PAST_WORK: { href: string; label: string }[] = [
 /** Optional "More" link at the end of the past-work list. */
 export const MORE_HREF: string | null = null
 
+/** Shown under "SKILLS & REPOS" in the footer: Claude Code skills, open-source repos, tools. */
+export const SKILLS: { href: string; label: string }[] = [
+  { href: 'https://github.com/samkhalsa/creator-scraper', label: 'Creator Scraper' },
+  { href: 'https://github.com/samkhalsa/health-brain-starter', label: 'Health Brain Starter' },
+]
+
+/** Optional "More" link at the end of the skills list. */
+export const SKILLS_MORE_HREF: string | null = 'https://github.com/samkhalsa'
+
 export const CONTACT = [
   { id: 'contact.x', href: 'https://x.com/samitkhalsa', emoji: '🐦' },
   { id: 'contact.linkedin', href: 'https://www.linkedin.com/in/heyimsamit/', emoji: '💼' },
