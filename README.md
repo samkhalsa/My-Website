@@ -18,6 +18,16 @@ npm run preview    # serve dist/ locally
 - **Journal entries:** add an object to `src/content/journal.json`. Required: `id`, `slug` (lowercase letters, digits, hyphens; never change it once published), `date` (`2026.09.11`), `dateTime` (`2026-09-11`), `text`. Optional: `title`, `titleHi`, `textHi`, `photos` (paths under `public/journal/`), `youtube` (video id), `links` (`{ href, title, image? }`). Entries are sorted newest first automatically. The build fails on duplicate or malformed slugs.
 - **Hindi strings:** `src/i18n/hi.ts` must define every key in `en.ts` (TypeScript enforces this).
 
+## Hero scene
+
+The home page opens on a full-screen picture (the grass hill). To set or replace it:
+
+1. Save the landscape image as `public/hero/scene.jpg` (2400×1350 ideal, figure in the upper-middle, calm grass lower-left where the text sits).
+2. Optionally save a portrait crop for phones as `public/hero/scene-portrait.jpg` (1350×2400).
+3. Run `npm run hero`. It writes the WebP/JPEG sizes, a blur placeholder, `src/content/hero.json`, and the preload tag in `index.html`. Commit the generated files.
+
+Without `scene.jpg` the hero shows a sky-and-hill gradient placeholder.
+
 ## Routes
 
 `/`, `/journal`, `/journal/<slug>` and the same under `/hi`. `vercel.json` rewrites every path to `index.html` so deep links work on Vercel.

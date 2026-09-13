@@ -730,3 +730,161 @@ header.big a.underline:hover { opacity: .5; }
   animation: summitSway calc(var(--dur) / 2.2) ease-in-out var(--delay) infinite;
   display: inline-block;
 }
+
+/* Home hero scene: full-screen grass hill with the site line over it */
+
+header.hero-scene {
+  align-items: flex-end;
+  box-sizing: border-box;
+  color: #fff;
+  height: auto;
+  isolation: isolate;
+  max-width: none;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: 10vw 10vw 8vw;
+  position: relative;
+}
+
+@media (max-width: 760px) {
+  header.hero-scene { padding: 18vw 5vw 12vw; }
+}
+
+.hero-scene-media,
+.hero-scene-media img {
+  height: 100%;
+  inset: 0;
+  left: 0;
+  object-fit: cover;
+  object-position: 50% 45%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -2;
+}
+
+/* Blur-up placeholder behind the real image; the gradient shows until scene-blur.jpg exists. */
+.hero-scene-media::before {
+  background:
+    url("/hero/scene-blur.jpg") center / cover no-repeat,
+    linear-gradient(180deg, #4f9be6 0%, #8ec5f5 38%, #9fd35a 42%, #4c9a2a 100%);
+  content: "";
+  inset: 0;
+  position: absolute;
+  z-index: -2;
+}
+
+.hero-scene-media img { z-index: -1; }
+
+.hero-scene--placeholder .hero-scene-media::before {
+  background:
+    radial-gradient(120% 60% at 30% 40%, #fff9 0%, #fff0 60%),
+    radial-gradient(90% 55% at 78% 25%, #ffffffb3 0%, #fff0 60%),
+    linear-gradient(180deg, #3d8fe3 0%, #7fbcf3 40%, #7fbcf3 46%, #a4d64f 47%, #58a52f 78%, #3f8a22 100%);
+}
+
+.hero-scene-media img {
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+
+.hero-scene-media img.is-loaded { opacity: 1; }
+
+/* Darkens the bottom so white text reads on any grass. */
+header.hero-scene::after {
+  background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, .45) 100%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+}
+
+.hero-scene-text {
+  position: relative;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, .35);
+  white-space: pre-wrap;
+  z-index: 1;
+}
+
+header.hero-scene a.underline { text-decoration-color: rgba(255, 255, 255, .7); }
+
+header.hero-scene .name::after {
+  background: #111;
+  color: #fff;
+}
+
+/* Butterflies */
+
+.butterflies {
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+
+.butterfly {
+  animation: butterflyDrift var(--dur) ease-in-out var(--delay) infinite alternate;
+  left: var(--x);
+  position: absolute;
+  top: var(--y);
+  will-change: transform;
+}
+
+.butterfly-body {
+  display: inline-flex;
+  perspective: 60px;
+  transform: scale(var(--scale));
+  transform-style: preserve-3d;
+}
+
+.butterfly-thorax {
+  background: #1a1a1a;
+  border-radius: 1px;
+  height: 20px;
+  margin: 7px -.5px 0;
+  width: 2px;
+}
+
+.butterfly-wing {
+  display: block;
+  height: 34px;
+  width: 17px;
+}
+
+@media (max-width: 760px) {
+  .butterfly-thorax { height: 14px; margin-top: 5px; }
+  .butterfly-wing { height: 24px; width: 12px; }
+}
+
+.butterfly-wing--left {
+  animation: butterflyFlapLeft var(--flap) ease-in-out infinite alternate;
+  transform-origin: right center;
+}
+
+.butterfly-wing--right {
+  animation: butterflyFlapRight var(--flap) ease-in-out infinite alternate;
+  transform-origin: left center;
+}
+
+@keyframes butterflyFlapLeft {
+  from { transform: rotateY(10deg); }
+  to { transform: rotateY(68deg); }
+}
+
+@keyframes butterflyFlapRight {
+  from { transform: rotateY(-10deg); }
+  to { transform: rotateY(-68deg); }
+}
+
+@keyframes butterflyDrift {
+  0% { transform: translate(0, 0) rotate(-8deg); }
+  25% { transform: translate(calc(var(--dx) * .45), calc(var(--dy) * -.6)) rotate(7deg); }
+  50% { transform: translate(var(--dx), calc(var(--dy) * -.15)) rotate(-5deg); }
+  75% { transform: translate(calc(var(--dx) * .6), var(--dy)) rotate(9deg); }
+  100% { transform: translate(calc(var(--dx) * .15), calc(var(--dy) * .4)) rotate(-6deg); }
+}
+
+@media (max-width: 480px) {
+  .butterfly--desktop { display: none; }
+}
