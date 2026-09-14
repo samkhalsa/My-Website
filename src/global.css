@@ -741,7 +741,7 @@ header.hero-scene {
   isolation: isolate;
   max-width: none;
   font-size: 6.5vw;
-  min-height: 100svh;
+  min-height: 90svh; /* leaves the next section peeking in as a scroll cue */
   overflow: hidden;
   padding: 10vw 10vw 6vw;
   position: relative;
