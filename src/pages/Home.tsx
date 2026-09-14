@@ -8,12 +8,9 @@ export function Home() {
   const intl = useIntl()
   usePageTitle(intl.formatMessage({ id: 'title.home' }))
   return (
-    <>
-      <HeroScene />
-      <section className="small">
-        <LastSeen />
-        <Footer />
-      </section>
-    </>
+    <HeroScene>
+      <LastSeen />
+      <Footer />
+    </HeroScene>
   )
 }

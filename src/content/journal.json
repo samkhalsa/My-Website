@@ -1,5 +1,13 @@
 [
   {
+    "id": "2026-09-13-three-days-to-28",
+    "slug": "three-days-to-28",
+    "date": "2026.09.13",
+    "dateTime": "2026-09-13",
+    "title": "three days to 28",
+    "text": "today i was contemplating turning 28…\n\ni'm three days away from 28. it's a… scratch that, it's always a nice time for consumer app founders to be born… in september. you always have spikes and a shit ton of users come in… happens every year…\n\nthis year too, shit's going off… this year i feel… i've grown a ton…\n\ni used to think being old and a founder means you're losing sight of trends, out of the loop, and don't know what you're doing. but i don't think that's necessarily true…\n\ni think what happens is at a certain age you feel like you know everything and you stop learning… i have never felt that. i always feel like there's room to grow… i'm still hungry, but it's a different kind of hunger… it's no longer a toxic hunger to work till i drop or shit like that… it's much more calculated, precise, and to the point…\n\ni feel this year has been a year of defeating a lot of shit… i think the biggest lesson i take away is execute with confidence… not in ignorance… people don't realize how hard it is to do that… i've learnt to trust my gut and it has been the best blessing ever. i realized that i am right, i just never fought hard enough for my thoughts…\n\ni've never felt so free but also never felt more responsible… the thing about decisions is if you never truly own it, you never truly feel it…\n\ntime gives you a reason to say it's not you, it's whatever else… it takes a certain courage and belief in yourself to own the decision and take it all the way. that's what i've learnt today and this year, and i'm grateful."
+  },
+  {
     "id": "2026-09-11-hello",
     "slug": "hello",
     "date": "2026.09.11",
@@ -18,7 +26,14 @@
     "titleHi": "मैं क्या बना रहा हूँ",
     "text": "Penseum is where most of my time goes right now.\n\nmore soon.",
     "textHi": "Penseum वह है जहाँ अभी मेरा ज़्यादातर समय जाता है।\n\nजल्द ही और।",
-    "photos": ["/journal/2026-09-01-1.png"],
-    "links": [{ "href": "https://penseum.com", "title": "Penseum" }]
+    "photos": [
+      "/journal/2026-09-01-1.png"
+    ],
+    "links": [
+      {
+        "href": "https://penseum.com",
+        "title": "Penseum"
+      }
+    ]
   }
 ]

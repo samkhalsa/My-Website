@@ -740,10 +740,10 @@ header.hero-scene {
   height: auto;
   isolation: isolate;
   max-width: none;
-  font-size: 6.5vw;
-  min-height: 90svh; /* leaves the next section peeking in as a scroll cue */
+  font-size: 5.5vw;
+  min-height: 100svh;
   overflow: hidden;
-  padding: 10vw 10vw 6vw;
+  padding: 10vw 10vw 4vw;
   position: relative;
 }
 
@@ -796,7 +796,7 @@ header.hero-scene {
 
 /* Darkens the bottom so white text reads on any grass. */
 header.hero-scene::after {
-  background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, .45) 100%);
+  background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, .55) 100%);
   content: "";
   inset: 0;
   pointer-events: none;
@@ -804,11 +804,30 @@ header.hero-scene::after {
   z-index: -1;
 }
 
-.hero-scene-text {
+.hero-scene-content {
   position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.hero-scene-text {
+  display: block;
   text-shadow: 0 2px 24px rgba(0, 0, 0, .35);
   white-space: pre-wrap;
-  z-index: 1;
+}
+
+/* Last-seen line and footer, laid over the bottom of the scene */
+.hero-scene-footer {
+  color: #fff;
+  margin-top: 2.5vw;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .45);
+}
+
+.hero-scene-footer a { text-decoration-color: rgba(255, 255, 255, .45); }
+.hero-scene-footer a:hover { text-decoration-color: rgba(255, 255, 255, .9); }
+
+@media (max-width: 760px) {
+  .hero-scene-footer { margin-top: 6vw; }
 }
 
 header.hero-scene a.underline { text-decoration-color: rgba(255, 255, 255, .7); }
