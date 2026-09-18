@@ -3,7 +3,7 @@ export const en = {
   'title.journal': 'Samit’s Journal',
   'title.notFound': 'Not found',
   'home.hero': '<name>Samit</name> is building <u>Penseum</u>.',
-  'home.lastSeen': 'Was seen at {venue} in {city} {when}.',
+  'home.lastSeen': 'Was seen {venue} in {city} {when}.',
   'home.lastSeen.loading': 'Looking for Samit...',
   'home.summit': 'Samit comes from summit',
   'home.lastSeen.somewhere': 'somewhere',

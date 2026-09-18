@@ -14,7 +14,7 @@ npm run preview    # serve dist/ locally
 ## Editing content
 
 - **Hero, footer, links:** `src/content/site.ts` (past-work list, contact links) and the `home.hero` string in `src/i18n/en.ts` / `src/i18n/hi.ts`.
-- **Last seen line:** edit `public/last-seen.json`. `createdAt` is an ISO timestamp; the site renders it as relative time ("2 days ago"). `nameHi` / `cityHi` are optional Hindi overrides.
+- **Last seen line:** edit `public/last-seen.json`. `name` is the phrase after "Was seen ...", so it carries its own preposition ("at a birthday party", "tinkering with Jev"). `createdAt` is an ISO timestamp; the site renders it as relative time ("2 days ago"). `nameHi` / `cityHi` are optional Hindi overrides.
 - **Journal entries:** add an object to `src/content/journal.json`. Required: `id`, `slug` (lowercase letters, digits, hyphens; never change it once published), `date` (`2026.09.11`), `dateTime` (`2026-09-11`), `text`. Optional: `title`, `titleHi`, `textHi`, `photos` (paths under `public/journal/`), `youtube` (video id), `links` (`{ href, title, image? }`). Entries are sorted newest first automatically. The build fails on duplicate or malformed slugs.
 - **Hindi strings:** `src/i18n/hi.ts` must define every key in `en.ts` (TypeScript enforces this).
 

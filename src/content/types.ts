@@ -21,6 +21,7 @@ export type JournalEntry = {
 
 export type LastSeen = {
   venue?: {
+    /** Phrase that follows "Was seen ..."; carries its own preposition, e.g. "at a birthday party", "tinkering with Jev". */
     name?: string
     nameHi?: string
     location?: { city?: string; cityHi?: string }
