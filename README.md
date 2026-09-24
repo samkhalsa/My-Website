@@ -20,13 +20,15 @@ npm run preview    # serve dist/ locally
 
 ## Hero scene
 
-The home page opens on a full-screen picture (the grass hill). To set or replace it:
+The home page is one screen: the portrait fills it, with the text and footer laid over it. To replace the picture:
 
-1. Save the landscape image as `public/hero/scene.jpg` (2400×1350 ideal, figure in the upper-middle, calm grass lower-left where the text sits).
-2. Optionally save a portrait crop for phones as `public/hero/scene-portrait.jpg` (1350×2400).
+1. Save the landscape image as `public/hero/scene.jpg` (16:9, head in the upper-middle with room below it for the text).
+2. Optionally save a tall version for phones as `public/hero/scene-portrait.jpg` (9:16 or taller, head in the top third). If you skip this, cut one from the landscape file with ffmpeg the way the current one was made, and keep `PORTRAIT_CROP` in `src/content/stickers.ts` in sync with the crop.
 3. Run `npm run hero`. It writes the WebP/JPEG sizes, a blur placeholder, `src/content/hero.json`, and the preload tag in `index.html`. Commit the generated files.
 
-Without `scene.jpg` the hero shows a sky-and-hill gradient placeholder.
+**Stickers:** the painted stickers on the face are clickable. Each one is a line in `src/content/stickers.ts` with its link and its position as a percentage of the landscape image. After changing the picture, re-measure them (a quick way: temporarily outline `.sticker-hotspot` in DevTools).
+
+Without `scene.jpg` the hero shows a gradient placeholder.
 
 ## Routes
 
