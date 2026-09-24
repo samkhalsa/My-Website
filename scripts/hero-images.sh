@@ -2,7 +2,8 @@
 # Generates responsive variants of the home hero scene.
 #
 #   public/hero/scene.jpg           -> required, landscape 16:9 (2400x1350 ideal)
-#   public/hero/scene-portrait.jpg  -> optional, portrait 9:16 for phones
+#   public/hero/scene-portrait.jpg  -> portrait 9:16 for phones (1350x2400+). Without
+#                                      it phones stretch the landscape image ~2-3x.
 #
 # Writes scene-{w}.webp / scene-{w}.jpg (and -portrait- variants), a tiny
 # scene-blur.jpg placeholder, updates src/content/hero.json and the preload
@@ -65,11 +66,14 @@ printf '{ "landscape": %s, "portrait": %s, "widths": %s, "portraitWidths": %s }\
 echo "  wrote src/content/hero.json"
 
 # Preload the landscape WebP set so the browser fetches it before the JS runs.
+# On portrait screens the 16:9 scene is sized by height, so ask for 16/9 of the
+# viewport height there (mirrors LANDSCAPE_SIZES in src/components/HeroScene.tsx).
 if [ "$landscape" = true ]; then
   srcset=""
   for w in $lw; do srcset+="/hero/scene-$w.webp ${w}w, "; done
   srcset=${srcset%, }
-  line="    <link rel=\"preload\" as=\"image\" type=\"image/webp\" imagesrcset=\"$srcset\" imagesizes=\"100vw\" />"
+  sizes="(orientation: portrait) 178vh, 100vw"
+  line="    <link rel=\"preload\" as=\"image\" type=\"image/webp\" imagesrcset=\"$srcset\" imagesizes=\"$sizes\" />"
 else
   line=""
 fi

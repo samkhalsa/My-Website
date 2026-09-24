@@ -23,7 +23,7 @@ npm run preview    # serve dist/ locally
 The home page opens on a full-screen picture (the grass hill). To set or replace it:
 
 1. Save the landscape image as `public/hero/scene.jpg` (2400×1350 ideal, figure in the upper-middle, calm grass lower-left where the text sits).
-2. Optionally save a portrait crop for phones as `public/hero/scene-portrait.jpg` (1350×2400).
+2. Save a portrait crop for phones as `public/hero/scene-portrait.jpg` (1350×2400 or larger). Phones fill the screen by height, so without it they stretch the landscape image 2–3× and it goes soft; a taller `scene.jpg` helps but only a portrait source is sharp on a 3× phone.
 3. Run `npm run hero`. It writes the WebP/JPEG sizes, a blur placeholder, `src/content/hero.json`, and the preload tag in `index.html`. Commit the generated files.
 
 Without `scene.jpg` the hero shows a sky-and-hill gradient placeholder.
