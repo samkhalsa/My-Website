@@ -20,13 +20,13 @@ npm run preview    # serve dist/ locally
 
 ## Hero scene
 
-The home page is one screen: the portrait fills it, with the text and footer laid over it. To replace the picture:
+The home page is one screen: the picture (currently the grass hill) fills it, with the text and footer laid over it. To replace it:
 
-1. Save the landscape image as `public/hero/scene.jpg` (16:9, head in the upper-middle with room below it for the text).
-2. Optionally save a tall version for phones as `public/hero/scene-portrait.jpg` (9:16 or taller, head in the top third). If you skip this, cut one from the landscape file with ffmpeg the way the current one was made, and keep `PORTRAIT_CROP` in `src/content/stickers.ts` in sync with the crop. Phones fill the screen by height, so this file's width is what decides how sharp they look: the current one is 528px wide and a 3× phone stretches it about 2.2×; cutting it from a larger original at 1100px+ wide makes it crisp.
-3. Run `npm run hero`. It writes the WebP/JPEG sizes, a blur placeholder, `src/content/hero.json`, and the preload tag in `index.html`. Commit the generated files.
+1. Save the landscape image as `public/hero/scene.jpg` (16:9, subject in the upper-middle with calm space lower-left where the text sits).
+2. Optionally save a tall version for phones as `public/hero/scene-portrait.jpg` (9:16, 1100px+ wide for a crisp result). Without it, phones use the landscape image sized by height.
+3. Run `npm run hero`. It writes the WebP/JPEG sizes, a blur placeholder, `src/content/hero.json`, and the preload tags in `index.html`. Commit the generated files.
 
-**Stickers:** the painted stickers on the face are clickable. Each one is a line in `src/content/stickers.ts` with its link and its position as a percentage of the landscape image. After changing the picture, re-measure them (a quick way: temporarily outline `.sticker-hotspot` in DevTools).
+**Stickers (optional):** `src/content/stickers.ts` can define clickable hotspots positioned as percentages of the landscape image, for pictures with something worth linking. It is empty for the hill scene.
 
 Without `scene.jpg` the hero shows a gradient placeholder.
 

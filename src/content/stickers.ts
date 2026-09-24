@@ -29,15 +29,6 @@ export type Sticker = {
  */
 export const PORTRAIT_CROP = { x: 576, y: 0, w: 528, h: 940, padH: 1176, srcW: 1672, srcH: 941 }
 
-export const STICKERS: Sticker[] = [
-  // left cheek
-  { label: 'Journal', href: '/journal', x: 42.9, y: 41.7, w: 3.8, h: 6.4, hotspot: true },
-  { label: 'X', href: 'https://x.com/samitkhalsa', x: 46.2, y: 42.5, w: 3, h: 5, hotspot: true },
-  { label: 'Penseum', href: 'https://penseum.com', x: 45.0, y: 47.3, w: 4.2, h: 7.6, hotspot: true },
-  { label: 'Boba', href: '/journal', x: 43.3, y: 51.6, w: 3, h: 8, hotspot: true },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/heyimsamit/', x: 46.2, y: 52.4, w: 2.8, h: 4.8, hotspot: true },
-  // right cheek
-  { label: 'Western University', href: 'https://www.uwo.ca/', x: 56.2, y: 40.9, w: 4.2, h: 6, hotspot: true },
-  { label: 'Digital Dash Dev', href: 'https://digitaldashdev.com', x: 56.7, y: 46.8, w: 3, h: 5, hotspot: true },
-  { label: 'GitHub', href: 'https://github.com/samkhalsa', x: 56.1, y: 51.8, w: 3, h: 5, hotspot: true },
-]
+// No painted stickers on the current (grass hill) image. Add entries here
+// when the picture has something worth linking; see the type above.
+export const STICKERS: Sticker[] = []
