@@ -21,12 +21,12 @@ command -v cwebp >/dev/null || { echo "cwebp not found (brew install webp)"; exi
 variants() {
   local name=$1 src=$2 srcw used=()
   srcw=$(sips -g pixelWidth "$src" | awk '/pixelWidth/ {print $2}')
-  rm -f "$DIR/$name"-*.jpg "$DIR/$name"-*.webp
+  rm -f "$DIR/$name"-[0-9]*.jpg "$DIR/$name"-[0-9]*.webp
   for w in "${WIDTHS[@]}"; do
     [ "$w" -le "$srcw" ] && used+=("$w")
   done
   if [ "${#used[@]}" -eq 0 ] || [ "${used[0]}" -lt "$srcw" ]; then
-    used=("$srcw" "${used[@]}")
+    used=("$srcw" ${used[@]+"${used[@]}"})
   fi
   for w in "${used[@]}"; do
     sips -Z "$w" "$src" --out "$DIR/$name-$w.jpg" >/dev/null

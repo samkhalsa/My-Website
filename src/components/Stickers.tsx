@@ -1,13 +1,13 @@
 import { useLayoutEffect, useState, type CSSProperties, type ReactNode, type RefObject } from 'react'
 import { Link } from 'react-router'
-import { STICKERS, type Sticker } from '../content/stickers'
+import { PORTRAIT_CROP, STICKERS, type Sticker } from '../content/stickers'
 import { useLocale } from '../locale/useLocale'
 import { localePath } from '../locale/paths'
 
 /** Where `object-position` puts the image inside the hero; keep in sync with HeroScene. */
 export const OBJECT_POSITION = { x: 0.5, y: 0.45 }
 
-type Rect = { left: number; top: number; width: number; height: number }
+type Rect = { left: number; top: number; width: number; height: number; portrait: boolean }
 
 /** The on-screen box of an `object-fit: cover` image inside `host`. */
 function coverRect(host: HTMLElement, img: HTMLImageElement): Rect | null {
@@ -19,7 +19,22 @@ function coverRect(host: HTMLElement, img: HTMLImageElement): Rect | null {
   const scale = Math.max(cw / iw, ch / ih)
   const width = iw * scale
   const height = ih * scale
-  return { left: (cw - width) * OBJECT_POSITION.x, top: (ch - height) * OBJECT_POSITION.y, width, height }
+  const portrait = /scene-portrait/.test(img.currentSrc)
+  return { left: (cw - width) * OBJECT_POSITION.x, top: (ch - height) * OBJECT_POSITION.y, width, height, portrait }
+}
+
+/** Landscape-image coordinates → portrait-crop coordinates (all in %). */
+function toPortrait(s: Sticker): Pick<Sticker, 'x' | 'y' | 'w' | 'h'> {
+  const c = PORTRAIT_CROP
+  const px = (s.x / 100) * c.srcW - c.x
+  const py = (s.y / 100) * c.srcH - c.y
+  const scale = c.srcW / c.w
+  return {
+    x: (px / c.w) * 100,
+    y: (py / c.padH) * 100,
+    w: (s.w ?? 5) * scale,
+    h: (s.h ?? 5) * scale,
+  }
 }
 
 function StickerLink({ s, className, style, children }: { s: Sticker; className: string; style: CSSProperties; children: ReactNode }) {
@@ -80,11 +95,12 @@ export function Stickers({
       }
     >
       {STICKERS.map((s) => {
+        const pos = rect.portrait ? toPortrait(s) : { x: s.x, y: s.y, w: s.w ?? 5, h: s.h ?? 5 }
         const style = {
-          '--x': `${s.x}%`,
-          '--y': `${s.y}%`,
-          '--w': s.w ?? 5,
-          '--h': s.h ?? 5,
+          '--x': `${pos.x}%`,
+          '--y': `${pos.y}%`,
+          '--w': pos.w,
+          '--h': pos.h,
           '--r': `${s.rotate ?? 0}deg`,
           '--s': s.size ?? 1,
           '--bg': s.color ?? '#fff',

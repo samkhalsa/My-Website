@@ -1,1 +1,1 @@
-{ "landscape": true, "portrait": false, "widths": [1672, 1600, 1000, 640], "portraitWidths": [] }
+{ "landscape": true, "portrait": true, "widths": [1672, 1600, 1000, 640], "portraitWidths": [528] }
