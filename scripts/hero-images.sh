@@ -19,18 +19,20 @@ command -v cwebp >/dev/null || { echo "cwebp not found (brew install webp)"; exi
 
 # Emits only widths the source can honour (never upscales); adds the source
 # width itself when it falls between the presets. Echoes the widths used.
+# Resamples by width (not -Z, which fits the longest side and would turn a
+# portrait "528" into a 528px-TALL image while the srcset still says 528w).
 variants() {
   local name=$1 src=$2 srcw used=()
   srcw=$(sips -g pixelWidth "$src" | awk '/pixelWidth/ {print $2}')
-  rm -f "$DIR/$name"-*.jpg "$DIR/$name"-*.webp
+  rm -f "$DIR/$name"-[0-9]*.jpg "$DIR/$name"-[0-9]*.webp
   for w in "${WIDTHS[@]}"; do
     [ "$w" -le "$srcw" ] && used+=("$w")
   done
   if [ "${#used[@]}" -eq 0 ] || [ "${used[0]}" -lt "$srcw" ]; then
-    used=("$srcw" "${used[@]}")
+    used=("$srcw" ${used[@]+"${used[@]}"})
   fi
   for w in "${used[@]}"; do
-    sips -Z "$w" "$src" --out "$DIR/$name-$w.jpg" >/dev/null
+    sips --resampleWidth "$w" "$src" --out "$DIR/$name-$w.jpg" >/dev/null
     cwebp -quiet -q "$QUALITY" "$DIR/$name-$w.jpg" -o "$DIR/$name-$w.webp"
   done
   echo "  $name (source ${srcw}px): ${used[*]} (webp + jpg)" >&2
@@ -65,17 +67,24 @@ printf '{ "landscape": %s, "portrait": %s, "widths": %s, "portraitWidths": %s }\
   "$landscape" "$portrait" "$(json_list $lw)" "$(json_list $pw)" > src/content/hero.json
 echo "  wrote src/content/hero.json"
 
-# Preload the landscape WebP set so the browser fetches it before the JS runs.
-# On portrait screens the 16:9 scene is sized by height, so ask for 16/9 of the
+# Preload the WebP set the <picture> will pick so the browser fetches it before
+# the JS runs. With a portrait set, each preload is gated on orientation so a
+# phone doesn't download a landscape variant it never shows. Without one, the
+# 16:9 scene is sized by height on portrait screens, so ask for 16/9 of the
 # viewport height there (mirrors LANDSCAPE_SIZES in src/components/HeroScene.tsx).
-if [ "$landscape" = true ]; then
-  srcset=""
-  for w in $lw; do srcset+="/hero/scene-$w.webp ${w}w, "; done
+preload() {  # name widths media sizes
+  local name=$1 widths=$2 media=$3 sizes=$4 srcset="" w
+  for w in $widths; do srcset+="/hero/$name-$w.webp ${w}w, "; done
   srcset=${srcset%, }
-  sizes="(orientation: portrait) 178vh, 100vw"
-  line="    <link rel=\"preload\" as=\"image\" type=\"image/webp\" imagesrcset=\"$srcset\" imagesizes=\"$sizes\" />"
-else
-  line=""
+  printf '    <link rel="preload" as="image" type="image/webp"%s imagesrcset="%s" imagesizes="%s" />' \
+    "${media:+ media=\"$media\"}" "$srcset" "$sizes"
+}
+line=""
+if [ "$landscape" = true ] && [ "$portrait" = true ]; then
+  line="$(preload scene-portrait "$pw" "(orientation: portrait)" "100vw")"
+  line+=$'\n'"$(preload scene "$lw" "(orientation: landscape)" "100vw")"
+elif [ "$landscape" = true ]; then
+  line="$(preload scene "$lw" "" "(orientation: portrait) 178vh, 100vw")"
 fi
 perl -0pi -e "s#(<!-- hero-preload -->)\n.*?\n?(\s*<!-- /hero-preload -->)#\$1\n$line\n\$2#s" index.html
 echo "  updated index.html preload"
