@@ -1,27 +1,30 @@
 /**
- * Stickers placed on the hero portrait. `x` / `y` are percentages of the
- * source image (0–100, measured from its top-left), so they stay glued to
- * the face at every viewport size. `rotate` in degrees, `size` scales the
- * sticker relative to the image width (1 = default).
+ * Clickable stickers on the hero portrait. Coordinates are percentages of the
+ * source image (0–100 from its top-left), so they stay glued to the face at
+ * every viewport size. `w` / `h` are the sticker's size as a percentage of
+ * the image width. Measured against public/hero/scene.jpg (1672×941).
+ *
+ * A sticker with `hotspot: true` is invisible until hovered (the picture
+ * already shows the sticker); without it, a white label sticker is drawn.
  */
 export type Sticker = {
   label: string
   href: string
   x: number
   y: number
+  w?: number
+  h?: number
   rotate?: number
   size?: number
-  /** Optional leading emoji. */
+  hotspot?: boolean
   emoji?: string
-  /** Background colour; default white. */
   color?: string
 }
 
 export const STICKERS: Sticker[] = [
-  { label: 'Penseum', href: 'https://penseum.com', x: 50, y: 46, rotate: -8, size: 1.25, color: '#ffe600' },
-  { label: 'Doppel Health', href: 'https://doppel.health/', x: 38, y: 40, rotate: 10, emoji: '🩺' },
-  { label: 'Digital Dash Dev', href: 'https://digitaldashdev.com', x: 62, y: 40, rotate: -12, emoji: '⚡' },
-  { label: 'Creator Scraper', href: 'https://github.com/samkhalsa/creator-scraper', x: 40, y: 52, rotate: 6, emoji: '🎯' },
-  { label: 'Health Brain', href: 'https://github.com/samkhalsa/health-brain-starter', x: 61, y: 53, rotate: -5, emoji: '🧠' },
-  { label: 'summit', href: '#', x: 50, y: 31, rotate: 4, emoji: '🏔️', size: 0.9 },
+  { label: 'Penseum', href: 'https://penseum.com', x: 42.6, y: 48.2, w: 7, h: 13.5, hotspot: true },
+  { label: 'Doppel Health', href: 'https://doppel.health/', x: 55.2, y: 65, w: 3.6, h: 6.4, hotspot: true },
+  { label: 'Western University', href: 'https://www.uwo.ca/', x: 58.4, y: 52, w: 5.2, h: 8.6, hotspot: true },
+  { label: 'Ivey', href: 'https://www.ivey.uwo.ca/', x: 58.3, y: 59.3, w: 3.6, h: 6, hotspot: true },
+  { label: 'Journal', href: '/journal', x: 43.2, y: 35.2, w: 4.2, h: 7.4, hotspot: true },
 ]

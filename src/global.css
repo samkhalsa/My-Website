@@ -889,3 +889,51 @@ header.hero-scene .name::after {
 @media (max-width: 760px) {
   .sticker { --sticker-font: calc(var(--img-w) * .011 * var(--s)); }
 }
+
+/* Invisible hotspots over stickers painted into the portrait */
+
+.sticker-hotspot {
+  border-radius: 50%;
+  cursor: pointer;
+  height: calc(var(--img-w) * var(--h) / 100);
+  left: var(--x);
+  pointer-events: auto;
+  position: absolute;
+  top: var(--y);
+  transform: translate(-50%, -50%);
+  transition: box-shadow .3s ease;
+  width: calc(var(--img-w) * var(--w) / 100);
+}
+
+.sticker-hotspot:hover,
+.sticker-hotspot:focus-visible {
+  box-shadow: 0 0 0 calc(var(--img-w) * .002) rgba(255, 255, 255, .9), 0 0 calc(var(--img-w) * .02) rgba(255, 255, 255, .6);
+  opacity: 1;
+  outline: none;
+}
+
+.sticker-hotspot-label {
+  background: #111;
+  border-radius: .35em;
+  color: #fff;
+  font-family: var(--body-font-family);
+  font-size: clamp(11px, calc(var(--img-w) * .009), 15px);
+  left: 50%;
+  letter-spacing: .05em;
+  line-height: 1;
+  opacity: 0;
+  padding: .55em .75em;
+  pointer-events: none;
+  position: absolute;
+  text-transform: uppercase;
+  top: 100%;
+  transform: translate(-50%, .2em);
+  transition: opacity .2s ease, transform .2s ease;
+  white-space: nowrap;
+}
+
+.sticker-hotspot:hover .sticker-hotspot-label,
+.sticker-hotspot:focus-visible .sticker-hotspot-label {
+  opacity: 1;
+  transform: translate(-50%, .5em);
+}

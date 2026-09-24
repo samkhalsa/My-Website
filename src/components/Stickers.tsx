@@ -1,5 +1,8 @@
-import { useLayoutEffect, useState, type CSSProperties, type RefObject } from 'react'
-import { STICKERS } from '../content/stickers'
+import { useLayoutEffect, useState, type CSSProperties, type ReactNode, type RefObject } from 'react'
+import { Link } from 'react-router'
+import { STICKERS, type Sticker } from '../content/stickers'
+import { useLocale } from '../locale/useLocale'
+import { localePath } from '../locale/paths'
 
 /** Where `object-position` puts the image inside the hero; keep in sync with HeroScene. */
 export const OBJECT_POSITION = { x: 0.5, y: 0.45 }
@@ -17,6 +20,22 @@ function coverRect(host: HTMLElement, img: HTMLImageElement): Rect | null {
   const width = iw * scale
   const height = ih * scale
   return { left: (cw - width) * OBJECT_POSITION.x, top: (ch - height) * OBJECT_POSITION.y, width, height }
+}
+
+function StickerLink({ s, className, style, children }: { s: Sticker; className: string; style: CSSProperties; children: ReactNode }) {
+  const locale = useLocale()
+  if (s.href.startsWith('/')) {
+    return (
+      <Link to={localePath(s.href, locale)} className={className} style={style} aria-label={s.label}>
+        {children}
+      </Link>
+    )
+  }
+  return (
+    <a href={s.href} className={className} style={style} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+      {children}
+    </a>
+  )
 }
 
 /**
@@ -60,31 +79,34 @@ export function Stickers({
         } as CSSProperties
       }
     >
-      {STICKERS.map((s) => (
-        <a
-          key={s.label}
-          className="sticker"
-          href={s.href}
-          target={s.href.startsWith('http') ? '_blank' : undefined}
-          rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-          style={
-            {
-              '--x': `${s.x}%`,
-              '--y': `${s.y}%`,
-              '--r': `${s.rotate ?? 0}deg`,
-              '--s': s.size ?? 1,
-              '--bg': s.color ?? '#fff',
-            } as CSSProperties
-          }
-        >
-          {s.emoji ? (
-            <span className="sticker-emoji" aria-hidden="true">
-              {s.emoji}
-            </span>
-          ) : null}
-          {s.label}
-        </a>
-      ))}
+      {STICKERS.map((s) => {
+        const style = {
+          '--x': `${s.x}%`,
+          '--y': `${s.y}%`,
+          '--w': s.w ?? 5,
+          '--h': s.h ?? 5,
+          '--r': `${s.rotate ?? 0}deg`,
+          '--s': s.size ?? 1,
+          '--bg': s.color ?? '#fff',
+        } as CSSProperties
+        if (s.hotspot) {
+          return (
+            <StickerLink key={s.label} s={s} className="sticker-hotspot" style={style}>
+              <span className="sticker-hotspot-label">{s.label}</span>
+            </StickerLink>
+          )
+        }
+        return (
+          <StickerLink key={s.label} s={s} className="sticker" style={style}>
+            {s.emoji ? (
+              <span className="sticker-emoji" aria-hidden="true">
+                {s.emoji}
+              </span>
+            ) : null}
+            {s.label}
+          </StickerLink>
+        )
+      })}
     </div>
   )
 }
