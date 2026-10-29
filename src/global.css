@@ -731,9 +731,12 @@ header.big a.underline:hover { opacity: .5; }
   display: inline-block;
 }
 
-/* Home hero scene: full-screen grass hill with the site line over it */
+/* Home hero scene: full-screen dithered meadow with the site line over it.
+   The lower half fades into the picture's own sky blue so white text reads
+   over the white dither without a muddy black gradient. */
 
 header.hero-scene {
+  --hero-blue: 8, 56, 240;
   align-items: flex-end;
   box-sizing: border-box;
   color: #fff;
@@ -794,9 +797,9 @@ header.hero-scene {
 
 .hero-scene-media img.is-loaded { opacity: 1; }
 
-/* Darkens the bottom so white text reads on any grass. */
+/* Fades the bottom into the sky blue; small type sits on the solid end of it. */
 header.hero-scene::after {
-  background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, .55) 100%);
+  background: linear-gradient(180deg, transparent 28%, rgba(var(--hero-blue), .6) 58%, rgba(var(--hero-blue), .94) 100%);
   content: "";
   inset: 0;
   pointer-events: none;
@@ -812,15 +815,14 @@ header.hero-scene::after {
 
 .hero-scene-text {
   display: block;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, .35);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, .3);
   white-space: pre-wrap;
 }
 
 /* Last-seen line and footer, laid over the bottom of the scene */
 .hero-scene-footer {
-  color: #fff;
   margin-top: 2.5vw;
-  text-shadow: 0 1px 12px rgba(0, 0, 0, .45);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .35);
 }
 
 .hero-scene-footer a { text-decoration-color: rgba(255, 255, 255, .45); }
