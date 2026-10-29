@@ -4,7 +4,7 @@ export const hi: Record<keyof typeof en, string> = {
   'title.home': 'समित खालसा',
   'title.journal': 'समित की डायरी',
   'title.notFound': 'नहीं मिला',
-  'home.hero': '<name>समित</name> <u>Penseum</u> बना रहा है।',
+  'home.hero': '<name>समित</name> कुछ नया बना रहा है।',
   'home.lastSeen': '{when} {venue}, {city} में देखा गया था।',
   'home.lastSeen.loading': 'समित को ढूँढ रहे हैं...',
   'home.summit': 'समित का अर्थ है शिखर',

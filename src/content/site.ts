@@ -5,6 +5,7 @@ export const PENSEUM_URL = 'https://penseum.com'
 
 /** Shown under "PAST WORK" in the footer. Fill in as needed. */
 export const PAST_WORK: { href: string; label: string }[] = [
+  { href: PENSEUM_URL, label: 'Penseum' },
   { href: 'https://doppel.health/', label: 'Doppel Health' },
   { href: 'https://digitaldashdev.com', label: 'Digital Dash Dev' },
 ]
